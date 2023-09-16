@@ -1,25 +1,22 @@
 #!/bin/bash
-# Program to tell a persons fortune
-echo -e "\n~~ Fortune Teller ~~\n"
-RESPONSES=("Yes" "No" "Maybe" "Outlook good" "Don't count on it" "Ask again later")
-N=$(( RANDOM%6 ))
-
-GET_FORTUNE() {
-    
-    if [[ ! $1 ]]
-    then
-        echo Ask a yes or no question: 
-    else
-        echo Try again.  Make sure it ends with a question mark:
-    fi
-
-    read QUESTION
-    
-}
-
-GET_FORTUNE
-until [[ $QUESTION =~ \?$ ]]
-do 
-    GET_FORTUNE again
-done
-echo -e "\n${RESPONSES[$N]}"
+# Program that counts down to zero from a given argument
+echo -e "\n~~ Countdown Timer ~~\n"
+if [[ $1 -gt 0 ]]
+then
+ : '
+    for (( i = $1; i >= 0; i-- ))
+    do
+        echo $i
+        sleep 1
+    done
+'
+    I=$1
+    while [[ $I -ge 0 ]]
+    do  
+        echo $I 
+        (( I-- ))
+        sleep 1
+    done
+else
+    echo "Include a positive integer as the first argument."
+fi
